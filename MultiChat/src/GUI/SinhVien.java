@@ -12,6 +12,7 @@ package GUI;
 public class SinhVien {
     public String name;
     public String ID;
+   
 
     public String getName() {
         return name;

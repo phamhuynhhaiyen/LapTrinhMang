@@ -6,15 +6,11 @@
 package LTM;
 
 import GUI.CLIENT;
-import static GUI.CLIENT.listSinhVien;
-import GUI.SinhVien;
 import GUI.Thread2;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +26,7 @@ public class YEUCAUKETNOI extends javax.swing.JFrame {
     static DatagramSocket clientsocket;
     public YEUCAUKETNOI() {
         initComponents();
+        
     }
 
     private static void Gui(String mang) throws IOException {
@@ -42,7 +39,6 @@ public class YEUCAUKETNOI extends javax.swing.JFrame {
         IncomingReader.start();
     }
     public class IncomingReader implements Runnable {
-
         @Override
         public void run() {
             try {
@@ -162,13 +158,15 @@ public class YEUCAUKETNOI extends javax.swing.JFrame {
                 Thread2 t = new Thread2(this);
                 t.start();
                 t.join(3000);
+                t.stop();
 
                 if (CHECK == false) {
                     JOptionPane.showMessageDialog(this, "Không thể kết nối, mời bạn nhập lại!");
                 } else {
                     //txtShow.append("You can chat... \n");
                     JOptionPane.showMessageDialog(this, "Connected");
-                    CLIENT frm = new CLIENT(port, diachi,clientsocket);
+                    //CLIENT frm = new CLIENT(port, diachi,clientsocket);
+                    LOGIN frm = new LOGIN(port, diachi,clientsocket);
                     frm.setVisible(true);
                     frm.setLocationRelativeTo(null);
                     this.setVisible(false);
